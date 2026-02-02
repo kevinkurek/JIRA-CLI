@@ -1,13 +1,10 @@
 use ellipse::Ellipse;
 
 pub fn get_column_string(text: &str, width: usize) -> String {
-    // use the truncate_ellipse function from the ellipse crate
     let len = text.len();
 
     match len.cmp(&width) {
-        // equal
         std::cmp::Ordering::Equal => text.to_owned(),
-        // less
         std::cmp::Ordering::Less => {
             let left_over = width - len;
             let mut column_string = text.to_owned();
@@ -18,20 +15,19 @@ pub fn get_column_string(text: &str, width: usize) -> String {
 
             column_string
         },
-        // greater
         std::cmp::Ordering::Greater => {
             if width == 0 {
-                return "".to_owned()
+                return "".to_owned();
             } else if width == 1 {
-                return ".".to_owned()
+                return ".".to_owned();
             } else if width == 2 {
-                return "..".to_owned()
-            } else if width == 3{
-                return "...".to_owned()
+                return "..".to_owned();
+            } else if width == 3 {
+                return "...".to_owned();
             }
-            let result = text.truncate_ellipse(width - 3);
+            let result = text.truncate_ellipse(width-3);
             result.to_string()
-        }
+        },
     }
 }
 
